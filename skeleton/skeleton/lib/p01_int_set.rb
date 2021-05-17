@@ -97,19 +97,19 @@ class ResizingIntSet
 
   def resize!
     arr = @store.dup
+    @count = 0
     @store = Array.new(num_buckets*2) { Array.new }
     arr.each do |sub_array|
       sub_array.each do |ele|
-        help_insert(ele)
+        insert(ele)
       end
     end
-    # resize! if num_buckets < count
   end
 
-  def help_insert(num)
-    if !self.include?(num)
-      @store[num % num_buckets] << num 
-      resize! if num_buckets < count
-    end
-  end
+  # def help_insert(num)
+  #   if !self.include?(num)
+  #     @store[num % num_buckets] << num 
+  #     resize! if num_buckets < count
+  #   end
+  # end
 end

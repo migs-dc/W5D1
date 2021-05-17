@@ -8,20 +8,20 @@ class HashSet
 
   def insert(key)
     if !include?(key)
-      @store[count % num_buckets] << key 
+      self[key.hash] << key 
       @count += 1
       resize! if @count > num_buckets
     end
   end
 
   def include?(key)
-    @store.any? { |ele| ele.include?(key) }
+    self[key.hash].include?(key)
   end
 
   def remove(key)
     if include?(key)
       @count -= 1
-      @store.each { |ele| ele.delete(key) }
+      self[key.hash].delete(key)
     end
   end
 
@@ -37,15 +37,9 @@ class HashSet
 
   def resize!
     arr = @store.dup
+    @count = 0
     @store = Array.new(num_buckets*2) { Array.new }
-    arr.each { |ele| ele.each { |ele_2| help_insert(ele_2) } }
-  end
-
-  def help_insert(key)
-    if !include?(key)
-      @store[count % num_buckets] << key 
-      resize! if @count > num_buckets
-    end
+    arr.each { |ele| ele.each { |ele_2| insert(ele_2) } }
   end
 
 end

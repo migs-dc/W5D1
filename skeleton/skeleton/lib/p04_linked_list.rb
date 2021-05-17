@@ -1,3 +1,4 @@
+# require 'enumerable'
 class Node
   attr_reader :key
   attr_accessor :val, :next, :prev
@@ -20,7 +21,12 @@ class Node
 end
 
 class LinkedList
+  # includes Enumerable
   def initialize
+    @head = Node.new
+    @tail = Node.new
+    @head.next = @tail
+    @tail.prev = @head
   end
 
   def [](i)
@@ -35,6 +41,7 @@ class LinkedList
   end
 
   def empty?
+    @head.next == @tail
   end
 
   def get(key)
@@ -44,6 +51,10 @@ class LinkedList
   end
 
   def append(key, val)
+    new_node = Node.new(key, val)
+    @tail.prev.next = new_node
+    new_node.next = @tail
+    new_node.prev = @head
   end
 
   def update(key, val)

@@ -9,6 +9,11 @@ class Array
       result += num.hash + num * i
     end
     result 
+=begin
+    result = result ^ num.hash + i.hash
+    reset result as going though array
+    
+=end
   end
 end
 
