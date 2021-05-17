@@ -27,7 +27,12 @@ class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    # rand(1..2)
+    result = 0
+    each.with_index do |key,value, i|
+      result += key.to_s.bytes.first
+    end
+    result 
   end
 end
 
