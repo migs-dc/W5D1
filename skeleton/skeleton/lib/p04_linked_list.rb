@@ -35,9 +35,11 @@ class LinkedList
   end
 
   def first
+    self[0]
   end
 
   def last
+    self[-1]
   end
 
   def empty?
@@ -51,10 +53,7 @@ class LinkedList
   end
 
   def append(key, val)
-    new_node = Node.new(key, val)
-    @tail.prev.next = new_node
-    new_node.next = @tail
-    new_node.prev = @head
+    
   end
 
   def update(key, val)
