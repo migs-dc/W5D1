@@ -67,10 +67,17 @@ class ResizingIntSet
   end
 
   def insert(num)
-    @store[num % num_buckets] << num if !include?(num)
+    if !self.include?(num)
+      @store[num % num_buckets] << num 
+      @count += 1
+    end
   end
 
   def remove(num)
+    if include?(num)
+      @store[num % @store.length].delete(num)
+      @count -= 1
+    end
   end
 
   def include?(num)
@@ -88,5 +95,6 @@ class ResizingIntSet
   end
 
   def resize!
+    
   end
 end
