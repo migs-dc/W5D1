@@ -15,10 +15,11 @@ end
 class String
   def hash
     result = 0
-    each_char.with_index do |char, i|
-      result += char.hash 
+    split("").each.with_index do |ele, i|
+      result += ele.bytes.last.hash + ele.bytes.first * i#+ rand(0..1)
     end
     result 
+    # self.to_i.hash
   end
 end
 
